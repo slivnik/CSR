@@ -1,0 +1,6 @@
+.DS_Store
+Icon
+lex.yy.c
+lexer
+test.*
+*~

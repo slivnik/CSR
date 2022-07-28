@@ -1,0 +1,9 @@
+InpLexer.hs
+InpParser.hs
+InpParser.info
+Main
+test.csr
+*.hi
+*.o
+tmp
+CSRparser

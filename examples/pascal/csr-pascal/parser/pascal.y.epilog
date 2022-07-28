@@ -1,0 +1,14 @@
+
+%%
+
+int yyerror (char *msg)
+{
+  printf ("SYN: %s.\n", msg);
+  exit (1);
+}
+
+int main()
+{
+  yyparse ();
+  return 0;
+}

@@ -1,0 +1,7 @@
+lex.l
+lex.yy.o
+parser
+pascal.tab.c
+pascal.tab.h
+pascal.y
+rules
