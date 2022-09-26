@@ -1,0 +1,39 @@
+CONTEXT-SENSITIVE REDUCTION SYSTEM:
+
+symbs: [ ] s a b c S Q
+terms: [ ] a b c
+goal:  s
+reductions:
+(1) a b c --> S
+(2) a S Q --> S
+(3) b b c c --> b Q c
+(4) Q c --> c Q
+
+NAIVE PARSER:
+
+. 
+[ a a . b b c c
+  10 compares and applying 1: (3) b b c c --> b Q c
+[ a a . b Q c
+
+. [ a a b Q c
+[ a a b . Q c
+  10 compares and applying 2: (4) Q c --> c Q
+[ a a b . c Q
+
+. [ a a b c Q
+[ a . a b c Q
+  6 compares and applying 3: (1) a b c --> S
+[ a . S Q
+
+. [ a S Q
+[ . a S Q
+  4 compares and applying 4: (2) a S Q --> S
+[ . S
+
+. [ S
+[ S ] .
+   compares
+
+33 total compares
+

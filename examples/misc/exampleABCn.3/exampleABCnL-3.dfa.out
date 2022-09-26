@@ -1,0 +1,56 @@
+CONTEXT-SENSITIVE REDUCTION SYSTEM:
+
+symbs: [ ] s a b c
+terms: [ ] a b c
+goal:  s
+reductions:
+(1) a a b --> a b a
+(2) b a b c --> b c a b
+(3) [ a b c --> [ s
+(4) s a b c --> s
+
+DFA PARSER:
+
+0 . 
+
+0 [ 1 a 12 a 4 a 4 b 5 . 
+  5 compares and applying 1: (1) a a b --> a b a
+0 [ 1 a 12 . a - b - a -
+
+0 [ 1 a 12 a 4 b 5 . a -
+  2 compares and applying 2: (1) a a b --> a b a
+0 [ 1 . a - b - a - a -
+
+0 [ 1 a 12 b 13 a 7 a 4 b 5 . 
+  5 compares and applying 3: (1) a a b --> a b a
+0 [ 1 a 12 b 13 . a - b - a -
+
+0 [ 1 a 12 b 13 a 7 b 8 a 7 b 8 c 10 . 
+  5 compares and applying 4: (2) b a b c --> b c a b
+0 [ 1 a 12 b 13 a 7 . b - c - a - b -
+
+0 [ 1 a 12 b 13 a 7 b 8 c 10 . a - b -
+  2 compares and applying 5: (2) b a b c --> b c a b
+0 [ 1 a 12 . b - c - a - b - a - b -
+
+0 [ 1 a 12 b 13 c 14 . a - b - a - b -
+  2 compares and applying 6: (3) [ a b c --> [ s
+0 . [ - s - a - b - a - b -
+
+0 [ 1 s 2 a 3 b 6 a 7 b 8 c 10 . 
+  7 compares and applying 7: (2) b a b c --> b c a b
+0 [ 1 s 2 a 3 . b - c - a - b -
+
+0 [ 1 s 2 a 3 b 6 c 11 . a - b -
+  2 compares and applying 8: (4) s a b c --> s
+0 [ 1 . s - a - b -
+
+0 [ 1 s 2 a 3 b 6 c 11 . 
+  4 compares and applying 9: (4) s a b c --> s
+0 [ 1 . s -
+
+0 [ 1 s 2 ] 0 .
+  2 compares
+
+36 total compares
+

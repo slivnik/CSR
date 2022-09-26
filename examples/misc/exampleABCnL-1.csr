@@ -1,0 +1,9 @@
+%tokens a b c ;
+%goal s ;
+
+[ a b c ] --> [ s ] ;
+[ a a --> [ a x ;
+x a --> a x ;
+x b --> y ;
+y b --> b y ;
+y c c --> c ;

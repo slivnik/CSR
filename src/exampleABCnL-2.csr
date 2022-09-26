@@ -1,9 +1,0 @@
-%tokens a b c ;
-%goal s ;
-
-[ a b c ] --> [ s(2,3,4) ] ;
-[ a a --> [ a(2,3) x ;
-x a --> 2 x ;
-x b b --> b(2,3) y ;
-y b --> 2 y ;
-y c c --> c(2,3) ;

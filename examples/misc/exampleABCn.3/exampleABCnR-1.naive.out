@@ -1,0 +1,76 @@
+CONTEXT-SENSITIVE REDUCTION SYSTEM:
+
+symbs: [ ] s a b c x y
+terms: [ ] a b c
+goal:  s
+reductions:
+(1) [ a b c ] --> [ s ]
+(2) c c ] --> x c ]
+(3) c x --> x c
+(4) b x --> y
+(5) b y --> y b
+(6) a a y --> a
+
+NAIVE PARSER:
+
+. 
+[ a a a b b b c . c c ]
+  23 compares and applying 1: (2) c c ] --> x c ]
+[ a a a b b b c . x c ]
+
+. [ a a a b b b c x c ]
+[ a a a b b b . c x c ]
+  19 compares and applying 2: (3) c x --> x c
+[ a a a b b b . x c c ]
+
+. [ a a a b b b x c c ]
+[ a a a b b . b x c c ]
+  17 compares and applying 3: (4) b x --> y
+[ a a a b b . y c c ]
+
+. [ a a a b b y c c ]
+[ a a a b . b y c c ]
+  15 compares and applying 4: (5) b y --> y b
+[ a a a b . y b c c ]
+
+. [ a a a b y b c c ]
+[ a a a . b y b c c ]
+  13 compares and applying 5: (5) b y --> y b
+[ a a a . y b b c c ]
+
+. [ a a a y b b c c ]
+[ a . a a y b b c c ]
+  9 compares and applying 6: (6) a a y --> a
+[ a . a b b c c ]
+
+. [ a a b b c c ]
+[ a a b b . c c ]
+  15 compares and applying 7: (2) c c ] --> x c ]
+[ a a b b . x c ]
+
+. [ a a b b x c ]
+[ a a b . b x c ]
+  12 compares and applying 8: (4) b x --> y
+[ a a b . y c ]
+
+. [ a a b y c ]
+[ a a . b y c ]
+  10 compares and applying 9: (5) b y --> y b
+[ a a . y b c ]
+
+. [ a a y b c ]
+[ . a a y b c ]
+  6 compares and applying 10: (6) a a y --> a
+[ . a b c ]
+
+. [ a b c ]
+. [ a b c ]
+  5 compares and applying 11: (1) [ a b c ] --> [ s ]
+. [ s ]
+
+. [ s ]
+[ s ] .
+   compares
+
+148 total compares
+

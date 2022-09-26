@@ -1,0 +1,64 @@
+CONTEXT-SENSITIVE REDUCTION SYSTEM:
+
+symbs: [ ] s a b c
+terms: [ ] a b c
+goal:  s
+reductions:
+(1) a a b --> a b a
+(2) b a b c --> b c a b
+(3) [ a b c --> [ s
+(4) s a b c --> s
+
+LIMITED BACKJUMP PARSER:
+
+. 
+[ a . a a b
+  9 compares and applying 1: (1) a a b --> a b a
+[ a . a b a
+
+[ . a a b a
+[ . a a b a
+  3 compares and applying 2: (1) a a b --> a b a
+[ . a b a a
+
+. [ a b a a
+[ a b . a a b
+  12 compares and applying 3: (1) a a b --> a b a
+[ a b . a b a
+
+[ a . b a b a
+[ a b a . b a b c
+  10 compares and applying 4: (2) b a b c --> b c a b
+[ a b a . b c a b
+
+[ a . b a b c a b
+[ a . b a b c a b
+  4 compares and applying 5: (2) b a b c --> b c a b
+[ a . b c a b a b
+
+. [ a b c a b a b
+. [ a b c a b a b
+  4 compares and applying 6: (3) [ a b c --> [ s
+. [ s a b a b
+
+[ . s a b a b
+[ s a . b a b c
+  10 compares and applying 7: (2) b a b c --> b c a b
+[ s a . b c a b
+
+[ . s a b c a b
+[ . s a b c a b
+  4 compares and applying 8: (4) s a b c --> s
+[ . s a b
+
+[ . s a b
+[ . s a b c
+  4 compares and applying 9: (4) s a b c --> s
+[ . s
+
+[ . s
+[ s ] .
+   compares
+
+63 total compares
+
