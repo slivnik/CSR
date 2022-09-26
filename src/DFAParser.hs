@@ -260,9 +260,12 @@ dfaParser dfa sfCs =
           |> ($ (rem++sfxCs))
     parser _ _ _ _ (pfx,sfx) = error ("\n\n"++(show (reverse pfx))++"\n"++(show (take 10 sfx)++"\n\n")) -- ":-( [INTERNAL ERROR]"
 
-dfaParserDriver :: Int -> CSR -> String -> IO ()
-dfaParserDriver prec csr input = do
-  putStrLn "DFA:\n" ; print dfa
+dfaParserDriver :: (String,Int) -> CSR -> String -> IO ()
+dfaParserDriver (mode,prec) csr input = do
+  if mode=="full" then do
+    putStrLn "DFA:\n"
+    print dfa
+  else return ()
   putStrLn "DFA PARSER:\n"
   (dfaParser dfa sfCs
    |> map (\ trace -> putStrLn (showsPrec prec trace ""))

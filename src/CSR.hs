@@ -147,9 +147,9 @@ data AST
 
 instance Show AST where
   showsPrec 1 ast@(ASTNode (Symbol _ nm) subtrees) =
-    (showsPrec 0 ast) {- .
+    (showsPrec 0 ast).
     (if null subtrees then id else
-     ('(':).(showsWithSep (',':) (map (showsPrec 1) subtrees)).(')':)) -}
+     ('(':).(showsWithSep (',':) (map (showsPrec 1) subtrees)).(')':))
   showsPrec 1 ast@(ASTLeaf (Symbol _ nm) index) =
     (showsPrec 0 ast).
     ('(':).(shows index).(')':)

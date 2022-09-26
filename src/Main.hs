@@ -16,8 +16,8 @@ main = do
   args <- getArgs
   let (filename,parser,mode) =
         case args of
-          [filename] -> (filename,"all","full")
-          [filename,parser] -> (filename,parser,"full")
+          [filename] -> (filename,"all","-")
+          [filename,parser] -> (filename,parser,"-")
           [filename,parser,mode] -> (filename,parser,mode)
           _ -> error ":-( Wrong number of arguments."
   (terms,goal,reductions) <- readExtCSRFile (filename)
@@ -35,11 +35,11 @@ main = do
     putStrLn (showsWithSep ('\n':) (map (showsPrec 1) desReductions) "\n")
   else return ()
   csr <- toCSR (symbs,terms,goal,desReductions)
-  -- putStrLn (showsPrec 1 csr "")
+  putStrLn (showsPrec 0 csr "")
   input <- getContents
-  if (parser `elem` ["all","naive"]) then naiveParserDriver 0 csr input else return ()
-  if (parser `elem` ["all","bjump"]) then limBJumpParserDriver 0 csr input else return ()
-  if (parser `elem` ["all","dfa"]) then dfaParserDriver 1 csr input else return ()
+  if (parser `elem` ["all","naive"]) then naiveParserDriver    (mode,0) csr input else return ()
+  if (parser `elem` ["all","bjump"]) then limBJumpParserDriver (mode,0) csr input else return ()
+  if (parser `elem` ["all","dfa"  ]) then dfaParserDriver      (mode,0) csr input else return ()
   return ()
 
 -------------------------------------------------------------------------------

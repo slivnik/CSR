@@ -136,9 +136,12 @@ naiveParser trie sfCs =
            | dstS <- redDst r ]
            (drop (length (redSrc r)) sfCs)
 
-naiveParserDriver :: Int -> CSR -> String -> IO ()
-naiveParserDriver prec csr input = do
-  putStrLn "NAIVE TRIE:\n" ; -- print trie
+naiveParserDriver :: (String,Int) -> CSR -> String -> IO ()
+naiveParserDriver (mode,prec) csr input = do
+  if mode=="full" then do
+    putStrLn "NAIVE TRIE:\n"
+    print trie
+  else return ()
   putStrLn "NAIVE PARSER:\n"
   (naiveParser trie sfCs
    |> map (\ trace -> putStrLn (showsPrec prec trace ""))
@@ -257,9 +260,12 @@ limBJumpParser trie sfCs =
         GT -> if null sfxCs then (revPfxCs,sfxCs) else
                 ((head sfxCs):revPfxCs,tail sfxCs)
 
-limBJumpParserDriver :: Int -> CSR -> String -> IO ()
-limBJumpParserDriver prec csr input = do
-  putStrLn "LIMITED BACKJUMP TRIE:\n" ; -- print trie
+limBJumpParserDriver :: (String,Int) -> CSR -> String -> IO ()
+limBJumpParserDriver (mode,prec) csr input = do
+  if mode=="full" then do
+    putStrLn "LIMITED BACKJUMP TRIE:\n"
+    print trie
+  else return ()
   putStrLn "LIMITED BACKJUMP PARSER:\n"
   (limBJumpParser trie sfCs
    |> map (\ trace -> putStrLn (showsPrec prec trace ""))
