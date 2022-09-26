@@ -6,3 +6,4 @@
 - <code>exampleABCn.2</code>: traces of parsing <code>a a b b c c</code> using <code>exampleABCn.csr</code>.
 - <code>exampleABCn.3</code>: traces of parsing <code>a a a b b b c c c</code> using <code>exampleABCnL-</code>$k$<code>.csr</code> and <code>exampleABCnR-</code>$k$<code>.csr</code> (for $k=1,2,3$).
 
+(See [README](https://github.com/slivnik/CSR/blob/main/src/README.md) regarding the input file format.)

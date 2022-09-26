@@ -70,3 +70,19 @@ To understand the output above, consider the following excerpt:
 ```
 The dot (<code>.</code>) denotes the current position.  Thus the step starts in state <code>1</code> right before <code>b Q c</code> that were added by reduction applying <code>b b c c --> b Q c</code>.  The parser moves over <code>b Q c</code> and applies reduction <code>Q c --> c Q</code>.  The current position is now right before the newly added <code>c Q</code> that replaced <code>Q c</code>.
 
+**Context-sensitive reduction system specification:** A context-sensitive reduction system is specified by a list of terminals, a symbol that the input should be reduced into, and a list of reductions.  For instance:
+```
+%tokens a b c ;
+%goal s ;
+
+a b c --> S ;
+a S Q --> S ;
+b b c c --> b Q c ;
+Q c --> c Q ;
+```
+
+The symbols on the left side of each reduction are numbered (starting with 1).  On the right side of the reduction the symbols, which are created by a reduction, might be augmented by a list of numbers denoting symbols reduced to that symbol.  Likewise, symbols that are not modified by the reduction but perhaps change places can also be specified by a number.  The last two reduction can therefore be rewritten to
+```
+b b c c --> b Q(2,3) c ;
+Q c --> 2 1 ;
+```
